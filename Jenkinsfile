@@ -12,6 +12,7 @@ pipeline {
         stage('Test') {
           steps {
             echo 'Test the project after build'
+            echo '"Get the driver path ${ChromeDriverPath}"'
           }
         }
 
@@ -24,5 +25,8 @@ pipeline {
       }
     }
 
+  }
+  environment {
+    ChromeDriverPath = 'C://ProfilePath/Driver'
   }
 }
