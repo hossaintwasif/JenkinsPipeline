@@ -1,32 +1,29 @@
 pipeline {
   agent any
+  environment {
+    ChromeDriverPath = 'C://ProfilePath/Driver'
+  }
   stages {
-    stage('Build') {
+    stage('Build and Test') {
       parallel {
-        stage('Build') {
+        stage('Compile') {
           steps {
             echo 'Building the Java project'
           }
         }
-
-        stage('Test') {
+        stage('Run Tests') {
           steps {
             echo 'Test the project after build'
-            echo '"Get the driver path ${ChromeDriverPath}"'
+            echo "Get the driver path ${ChromeDriverPath}"
           }
         }
-
       }
     }
 
     stage('Deploy') {
       steps {
-        echo 'Deploy the project in llS server'
+        echo 'Deploy the project in IIS server'
       }
     }
-
-  }
-  environment {
-    ChromeDriverPath = 'C://ProfilePath/Driver'
   }
 }
