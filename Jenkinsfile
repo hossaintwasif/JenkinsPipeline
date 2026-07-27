@@ -26,8 +26,19 @@ pipeline {
     }
 
     stage('Deploy') {
-      steps {
-        echo 'Deploy the project in IIS server'
+      parallel {
+        stage('Deploy') {
+          steps {
+            echo 'Deploy the project in IIS server'
+          }
+        }
+
+        stage('Artifacts') {
+          steps {
+            archiveArtifacts 'LogTestFile.txt'
+          }
+        }
+
       }
     }
 
